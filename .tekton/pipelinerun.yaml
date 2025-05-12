@@ -20,6 +20,8 @@ metadata:
     # Add build task
     pipelinesascode.tekton.dev/task-2: "openshift-client"
 
+
+
     # You can add more tasks by increasing the suffix number, you can specify
     # them as array to have multiple of them.
     # browse the tasks you want to include from hub on https://hub.tekton.dev/
@@ -79,7 +81,7 @@ spec:
           - golangci-lint
         params:
           - name: SCRIPT
-            value: "oc new-build --strategy=docker https://github.com/col1985/ocp-pipelines-pac-demo.git#feat/api-app"
+            value: "pwd && oc new-build --strategy=docker https://github.com/col1985/ocp-pipelines-pac-demo.git#feat/api-app"
           # - name: IMAGE
           #   value: $(params.IMAGE) # Use the IMAGE pipeline param
           # - name: DOCKERFILE_PATH

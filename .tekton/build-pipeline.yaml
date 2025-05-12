@@ -1,0 +1,40 @@
+Version: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: docker-build-pipeline
+spec:
+  tasks:
+    - name: fetch-source
+      taskRef:
+        name: git-clone
+      params:
+        - name: url
+          value: "https://github.com/your-repo/your-app" # Replace with your repository URL
+        - name: revision
+          value: "main" # Replace with your desired branch/tag
+      workspaces:
+        - name: source-workspace
+          workspace: source-workspace
+    - name: build-and-push
+      taskRef:
+        name: buildah # Or use "kaniko" or "dockerfile-build"
+      params:
+        - name: IMAGE
+          value: "image-registry.openshift-cluster.example.com/your-project/your-image:latest" # Replace with your image details
+        - name: DOCKERFILE
+          value: "Dockerfile" # Path to your Dockerfile
+        - name: CONTEXT
+          value: "." # Context directory for the build
+      workspaces:
+        - name: source
+          workspace: source-workspace
+      # Use a volumeClaimTemplate to dynamically provision a persistent volume
+      volumeClaimTemplate:
+        spec:
+          accessModes:
+            - ReadWriteOnce
+          resources:
+            requests:
+              storage: 1Gi
+  workspaces:
+    - name: source-workspace
