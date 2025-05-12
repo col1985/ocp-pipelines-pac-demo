@@ -75,7 +75,6 @@ spec:
       - name: build-image # Add the build-image task
         taskRef:
           name: buildah
-          kind: ClusterTask
         runAfter:
           - golangci-lint
         params:
