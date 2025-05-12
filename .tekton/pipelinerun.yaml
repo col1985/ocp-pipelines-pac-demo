@@ -74,7 +74,7 @@ spec:
             workspace: source
       - name: build-image # Add the build-image task
         taskRef:
-          name: build-image-openshift
+          name: buildah
         runAfter:
           - golangci-lint
         params:
