@@ -249,7 +249,7 @@ func main() {
     mux.HandleFunc("/items", app.getItemsHandler) //handles /items
 
 	// Start the server using the mux.
-	fmt.Println("Server listening on port 8080")
+	log.Println("Server listening on port 8080")
 	if err := http.ListenAndServe(":8080", mux); err != nil {
 		log.Fatalf("Server failed: %v", err)
 	}
