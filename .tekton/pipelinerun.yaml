@@ -81,8 +81,8 @@ spec:
           - golangci-lint
         params:
           - name: SCRIPT
-            value: "oc new-build --name=my-api-app https://github.com/col1985/ocp-pipelines-pac-demo.git#feat/api-app"
-            # value: "oc start-build ocp-pipelines-pac-demo --from-dir='./workspace/source' --wait --follow"
+            # value: "oc new-build --name=my-api-app https://github.com/col1985/ocp-pipelines-pac-demo.git#feat/api-app"
+            value: "oc start-build my-api-app --from-dir='./workspace/source' --wait --follow"
           # - name: IMAGE
           #   value: $(params.IMAGE) # Use the IMAGE pipeline param
           # - name: DOCKERFILE_PATH
