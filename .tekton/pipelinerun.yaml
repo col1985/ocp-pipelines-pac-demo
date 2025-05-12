@@ -81,7 +81,7 @@ spec:
           - golangci-lint
         params:
           - name: SCRIPT
-            value: "oc new-build --strategy=docker ./workspace/source"
+            value: "oc start-build --strategy=docker --from-dir='./workspace/source'"
           # - name: IMAGE
           #   value: $(params.IMAGE) # Use the IMAGE pipeline param
           # - name: DOCKERFILE_PATH
