@@ -18,7 +18,7 @@ metadata:
     pipelinesascode.tekton.dev/task-1: "golangci-lint"
 
     # Add build task
-    pipelinesascode.tekton.dev/task-2: "buildah"
+    pipelinesascode.tekton.dev/task-2: "openshift-client"
 
     # You can add more tasks by increasing the suffix number, you can specify
     # them as array to have multiple of them.
@@ -74,16 +74,18 @@ spec:
             workspace: source
       - name: build-image # Add the build-image task
         taskRef:
-          name: buildah
+          name: openshift-client
         runAfter:
           - golangci-lint
         params:
-          - name: IMAGE
-            value: $(params.IMAGE) # Use the IMAGE pipeline param
-          - name: DOCKERFILE_PATH
-            value: "Containerfile"  # Or the path to your Dockerfile
-          - name: CONTEXT_DIR
-            value: "."
+          - name: SCRIPT
+            value: "oc new-build --dockerfile='Containerfile'"
+          # - name: IMAGE
+          #   value: $(params.IMAGE) # Use the IMAGE pipeline param
+          # - name: DOCKERFILE_PATH
+          #   value: "Containerfile"  # Or the path to your Dockerfile
+          # - name: CONTEXT_DIR
+          #   value: "."
         workspaces:
           - name: source
             workspace: source
