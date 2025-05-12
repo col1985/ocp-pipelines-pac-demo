@@ -34,6 +34,10 @@ spec:
   params:
     # The variable with brackets are special to Pipelines as Code
     # They will automatically be expanded with the events from Github.
+    - name: app_name
+      value: "my-api-app"
+    - name: src_dir
+      value: "./workspace/source"
     - name: repo_url
       value: "{{ repo_url }}"
     - name: revision
@@ -42,6 +46,8 @@ spec:
       value: "quay.io/cbennett/items-api:{{ revision }}" # Update with your Quay details
   pipelineSpec:
     params:
+      - name: app_name
+      - name: src_dir
       - name: repo_url
       - name: revision
       - name: IMAGE # Add the IMAGE param to the pipelineSpec
@@ -82,7 +88,7 @@ spec:
         params:
           - name: SCRIPT
             # value: "oc new-build --name=my-api-app --strategy=docker https://github.com/col1985/ocp-pipelines-pac-demo.git#feat/api-app"
-            value: "oc start-build go-api-app --from-dir='./workspace/source' --wait --follow"
+            value: "oc start-build $(params.app_name) --from-dir=$(params.src_dir) --wait --follow"
           # - name: IMAGE
           #   value: $(params.IMAGE) # Use the IMAGE pipeline param
           # - name: DOCKERFILE_PATH
