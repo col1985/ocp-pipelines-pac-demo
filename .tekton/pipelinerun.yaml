@@ -81,7 +81,7 @@ spec:
           - golangci-lint
         params:
           - name: SCRIPT
-            value: "ls -lha workspace/source && oc new-build --strategy=docker https://github.com/col1985/ocp-pipelines-pac-demo.git#feat/api-app"
+            value: "oc new-build --strategy=docker ./workspace/source"
           # - name: IMAGE
           #   value: $(params.IMAGE) # Use the IMAGE pipeline param
           # - name: DOCKERFILE_PATH
