@@ -8,7 +8,6 @@ WORKDIR /app
 # Copy the source code into the container.
 COPY . .
 
-RUN pwd && ls -la
 # Build the Go application.  This creates an optimized executable.
 RUN go build -o main
 
