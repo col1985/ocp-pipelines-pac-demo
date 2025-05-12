@@ -1,10 +1,49 @@
-# Pipelines-as-Code - Demo Repository
+# Pipelines-as-Code - GO API Demo
 
-a badly written hello world in Golang used for demo using [Pipelines-as-Code](https://pipelinesascode.com).
-Follow the [Getting Started Guide](https://pipelinesascode.com/docs/install/getting-started/) for Pipelines-as-Code and hopefully everything will make sense 💫
+Repository for a basic Go API application to demo Pipelines as code with Openshift Pipelines.
 
-> [!IMPORTANT]  
-> Do not fork this repo, but instead use it as a Template by following this link:
->
-> https://github.com/openshift-pipelines/pac-demo/generate
->
+## Build and run with Podman
+
+### Build
+
+```bash
+podman build -t my-go-api:latest -f Containerfile
+```
+
+### Run
+
+```bash
+podman run -p 8080:8080 my-go-api:latest
+```
+
+## Test API App
+
+### Create an item
+
+```bash
+curl -X POST -H "Content-Type: application/json" -d '{"name":"Test Item","value":111}' http://localhost:8080/items/
+```
+
+### List Items
+
+```bash
+ curl http://localhost:8080/items/ | jq .
+```
+
+### Get an item
+
+```bash
+curl http://localhost:8080/items/{id}
+```
+
+### Delete an Item
+
+```bash
+curl -X DELETE http://localhost:8080/items/{id}
+```
+
+### Update an Item
+
+```bash
+curl -X PUT -H "Content-Type: application/json" -d '{"name":"Updated Item","value":20}' http://localhost:8080/items/{id}
+```
