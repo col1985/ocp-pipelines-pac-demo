@@ -18,7 +18,7 @@ metadata:
     pipelinesascode.tekton.dev/task-1: "golangci-lint"
 
     # Add build task
-    pipelinesascode.tekton.dev/task-2: "buildah"
+    pipelinesascode.tekton.dev/task-2: "docker-build"
 
     # You can add more tasks by increasing the suffix number, you can specify
     # them as array to have multiple of them.
@@ -74,7 +74,7 @@ spec:
             workspace: source
       - name: build-image # Add the build-image task
         taskRef:
-          name: buildah # Changed taskRef name here
+          name: docker-build # Changed taskRef name here
         runAfter:
           - golangci-lint
         params:
